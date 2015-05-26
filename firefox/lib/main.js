@@ -21,7 +21,7 @@ var httpRequestObserver =
             for(var key in rules) {
                 var rule = rules[key];
                 var re = new RegExp(rule.p, "i");
-                if (re.test(url)) {
+                if (re.test(requestURL)) {
                     var redirectUrl = requestURL.replace(re, rule.t);
                     httpChannel.redirectTo(newURI(redirectUrl));
                 }
