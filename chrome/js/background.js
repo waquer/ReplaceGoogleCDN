@@ -11,13 +11,13 @@ var rules = [
 
 chrome.webRequest.onBeforeRequest.addListener(
     function(request) {
-        var url = request.url;
+        var requestURL = request.url;
         for(var key in rules) {
             var rule = rules[key];
             var re = new RegExp(rule.p, "i");
-            if(re.test(url)) {
-                url = url.replace(re, rule.t);
-                return {redirectUrl: url};
+            if(re.test(requestURL)) {
+                var redirectUrl = requestURL.replace(re, rule.t);
+                return {redirectUrl: redirectUrl};
             }
         }
     },
