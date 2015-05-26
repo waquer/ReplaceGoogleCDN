@@ -1,0 +1,2 @@
+# ReplaceGoogleCDN
+将GoogleCDN替换为国内CDN地址
