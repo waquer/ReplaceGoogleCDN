@@ -1,14 +1,16 @@
 const { Cc, Ci } = require("chrome");
 const { newURI } = require('sdk/url/utils');
 
-var rules = {
-    'http://ajax.googleapis.com':'http://ajax.useso.com',
-    'http://fonts.googleapis.com':'http://fonts.useso.com',
-    'https://ajax.googleapis.com':'https://ajax.lug.ustc.edu.cn',
-    'https://fonts.googleapis.com':'https://fonts.lug.ustc.edu.cn',
-    'themes.googleusercontent.com':'google-themes.lug.ustc.edu.cn',
-    'fonts.gstatic.com':'fonts-gstatic.lug.ustc.edu.cn'
-};
+var rules = [
+    { "p" : "http://ajax.googleapis.com",    "t" : "http://ajax.useso.com" }
+    ,{ "p" : "http://fonts.googleapis.com",  "t" : "http://fonts.useso.com" }
+    ,{ "p" : "https://ajax.googleapis.com",  "t" : "https://ajax.lug.ustc.edu.cn" }
+    ,{ "p" : "https://fonts.googleapis.com", "t" : "https://fonts.lug.ustc.edu.cn" }
+    ,{ "p" : "themes.googleusercontent.com", "t" : "google-themes.lug.ustc.edu.cn" }
+    ,{ "p" : "fonts.gstatic.com",            "t" : "fonts-gstatic.lug.ustc.edu.cn" }
+    ,{ "p" : "http://(www|\\d).gravatar.com","t" : "http://gravatar.duoshuo.com" }
+
+];
 
 var httpRequestObserver =
 {
@@ -17,8 +19,10 @@ var httpRequestObserver =
             var httpChannel = subject.QueryInterface(Ci.nsIHttpChannel);
             var requestURL = subject.URI.spec;
             for(var key in rules) {
-                if (requestURL.indexOf(key) > -1) {
-                    var redirectUrl = requestURL.replace(key,rules[key]);
+                var rule = rules[key];
+                var re = new RegExp(rule.p, "i");
+                if (re.test(url)) {
+                    var redirectUrl = requestURL.replace(re, rule.t);
                     httpChannel.redirectTo(newURI(redirectUrl));
                 }
             }
