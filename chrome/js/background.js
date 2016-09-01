@@ -1,5 +1,5 @@
 var rules = [
-    { "p" : "http://ajax.googleapis.com",    "t" : "http://ajax.useso.com" },
+    { "p" : "http://ajax.googleapis.com",   "t" : "http://ajax.useso.com" },
     { "p" : "http://fonts.googleapis.com",  "t" : "http://fonts.useso.com" },
     { "p" : "https://ajax.googleapis.com",  "t" : "https://ajax.lug.ustc.edu.cn" },
     { "p" : "https://fonts.googleapis.com", "t" : "https://fonts.lug.ustc.edu.cn" },
