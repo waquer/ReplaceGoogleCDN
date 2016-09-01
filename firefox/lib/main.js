@@ -2,13 +2,8 @@ const { Cc, Ci } = require("chrome");
 const { newURI } = require('sdk/url/utils');
 
 var rules = [
-    { "p" : "http://ajax.googleapis.com",    "t" : "http://ajax.useso.com" },
-    { "p" : "http://fonts.googleapis.com",  "t" : "http://fonts.useso.com" },
-    { "p" : "https://ajax.googleapis.com",  "t" : "https://ajax.lug.ustc.edu.cn" },
-    { "p" : "https://fonts.googleapis.com", "t" : "https://fonts.lug.ustc.edu.cn" },
-    { "p" : "themes.googleusercontent.com", "t" : "google-themes.lug.ustc.edu.cn" },
-    { "p" : "fonts.gstatic.com",            "t" : "fonts-gstatic.lug.ustc.edu.cn" },
-    { "p" : "http://(www|\\d).gravatar.com","t" : "http://gravatar.duoshuo.com" }
+    { "p" : "//ajax.googleapis.com",   "t" : "//ajax.useso.com" },
+    { "p" : "//fonts.googleapis.com",  "t" : "//fonts.useso.com" }
 ];
 
 var httpRequestObserver =
