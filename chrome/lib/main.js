@@ -1,22 +1,18 @@
 var rules = [
-    { "p" : "//ajax.googleapis.com",   "t" : "//ajax.useso.com" },
-    { "p" : "//fonts.googleapis.com",  "t" : "//fonts.useso.com" },
+    { "s": "ajax.googleapis.com", "t": "ajax.cat.net" },
+    { "s": "fonts.googleapis.com", "t": "fonts.cat.net" },
 ];
 
 chrome.webRequest.onBeforeRequest.addListener(
-    function(request) {
-        var requestURL = request.url;
-        for(var key in rules) {
-            var rule = rules[key];
-            var re = new RegExp(rule.p, "i");
-            if(re.test(requestURL)) {
-                var redirectUrl = requestURL.replace(re, rule.t);
-                return {redirectUrl: redirectUrl};
+    function (request) {
+        var redirectUrl, requestURL = request.url;
+        for (var i in rules) {
+            if (requestURL.indexOf(rules[i].s)) {
+                redirectUrl = requestURL.replace(rules[i].s, rules[i].t);
+                return { redirectUrl: redirectUrl };
             }
         }
     },
-    {
-        urls: ["<all_urls>"]
-    },
+    { urls: ["<all_urls>"] },
     ["blocking"]
 );
